@@ -1,67 +1,83 @@
 <!DOCTYPE html>
 <html>
 
-   <head>
-      <meta charset="utf-8">
-      <title>Compiler Design</title>
-       
-   </head>
-	
-   <body>
-      <h1 align="center">COMPILER DESIGN</h1>
-      <h1 align="left">List Of Grammers</h1>
-       <table border="1" align="left">
-           
-           <tr>
-               <td><h2>&nbsp;1.&nbsp;</h2></td>
-               <td><h2>S → 0 S 1  | 0 1 </h2></td>
-           </tr>
-           
-           <tr>
-               <td><h2>&nbsp;2.&nbsp;</h2></td>
-               <td><h2>S → S ( S ) S   | ε </h2></td>
-           </tr>
-           
-           <tr>
-               <td><h2>&nbsp;3.&nbsp;</h2></td>
-               <td><h2>S → A <br/> A → BC | DBC <br/> B → Bb | ε <br/> C → c | ε <br/> D → a | d</h2></td>
-           </tr>
-           
-           <tr>
-               <td><h2>&nbsp;4.&nbsp;</h2></td>
-               <td><h2>S → CC <br/> C →  cC  | d</h2></td>
-           </tr>
-           
-           <tr>
-               <td><h2>&nbsp;5.&nbsp;</h2></td>
-               <td><h2>E → E + T | T <br/>T → T * F | F <br/> F → (E) | id </h2></td>
-           </tr>
-           
-           <tr>
-               <td><h2>&nbsp;6.&nbsp;</h2></td>
-               <td><h2>S → AaAb | BbBa <br/> A → ε <br/>  B → ε  </h2></td>
-           </tr>
-           
-           <tr>
-               <td><h2>&nbsp;7.&nbsp;</h2></td>
-               <td><h2>S → 0 | A <br/>S → AB <br/> B → 1 </h2></td>
-           </tr>
-           
-           <tr>
-               <td><h2>&nbsp;8.&nbsp;</h2></td>
-               <td><h2>S →  S + S |  S * S  | a</h2></td>
-           </tr>
-           
-           <tr>
-               <td><h2>&nbsp;9.&nbsp;</h2></td>
-               <td><h2>S → (L)  | a <br/> L →  L,S | S</h2></td>
-           </tr>
-           
-           <tr>
-               <td><h2>&nbsp;10.&nbsp;</h2></td>
-               <td><h2>S → ABe <br/> A → dB | aS | c <br/> B → AS | b </h2></td>
-           </tr>
-       </table>
-   </body>
+<head>
+    <meta charset="utf-8">
+    <title>Compiler Design</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="script.js."></script>
+</head>
+
+<body>
+    <h1 align="center">COMPILER DESIGN</h1>
     
+
+    <h1 align="left">List Of Grammers</h1>
+
+    <table border="1" align="left">
+
+        <tr>
+            <td><h2>&nbsp;1.&nbsp;</h2></td>
+            <td><h2>S → 0 S 1  | 0 1 </h2></td>
+        </tr>
+
+        <tr>
+            <td><h2>&nbsp;2.&nbsp;</h2></td>
+            <td><h2>S → S ( S ) S   | ε </h2></td>
+        </tr>
+
+        <tr>
+            <td><h2>&nbsp;3.&nbsp;</h2></td>
+            <td><h2>S → A <br /> A → BC | DBC <br /> B → Bb | ε <br /> C → c | ε <br /> D → a | d</h2></td>
+        </tr>
+
+        <tr>
+            <td><h2>&nbsp;4.&nbsp;</h2></td>
+            <td><h2>S → CC <br /> C →  cC  | d</h2></td>
+        </tr>
+
+        <tr>
+            <td><h2>&nbsp;5.&nbsp;</h2></td>
+            <td><h2>E → E + T | T <br />T → T * F | F <br /> F → (E) | id </h2></td>
+        </tr>
+
+        <tr>
+            <td><h2>&nbsp;6.&nbsp;</h2></td>
+            <td><h2>S → AaAb | BbBa <br /> A → ε <br />  B → ε  </h2></td>
+        </tr>
+
+        <tr>
+            <td><h2>&nbsp;7.&nbsp;</h2></td>
+            <td><h2>S → 0 | A <br />S → AB <br /> B → 1 </h2></td>
+        </tr>
+
+        <tr>
+            <td><h2>&nbsp;8.&nbsp;</h2></td>
+            <td><h2>S →  S + S |  S * S  | a</h2></td>
+        </tr>
+
+        <tr>
+            <td><h2>&nbsp;9.&nbsp;</h2></td>
+            <td><h2>S → (L)  | a <br /> L →  L,S | S</h2></td>
+        </tr>
+
+        <tr>
+            <td><h2>&nbsp;10.&nbsp;</h2></td>
+            <td><h2>S → ABe <br /> A → dB | aS | c <br /> B → AS | b </h2></td>
+        </tr>
+
+    </table>
+
+
+    <div align="center">
+        <textarea rows="4" cols="50" id="inp" ></textarea>
+        <br />
+        <button type="button" class="btn btn-primary" onclick="validate()">Validate</button>
+    </div>
+    
+</body>
+
 </html>
