@@ -17,6 +17,8 @@ function validate()
 
         stm.id = line[0];
         stm.gives = new Array();
+        stm.first = new Array();
+        stm.follow = new Array();
 
         var spli = exp[0].split('→');
         stm.gives.push(spli[1]);
@@ -30,4 +32,17 @@ function validate()
 
         grammer.push(stm);
     }
+}
+function check()
+{
+    var i,j;
+    for(i=0;i<grammer.length;i++)
+    {
+        alert(grammer[i].id);
+        alert(grammer[i].gives);
+    }
+}
+
+function removeleftrecursion()
+{
 }
