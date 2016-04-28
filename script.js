@@ -26,20 +26,20 @@ function validate()
 
         var stm = new Object();
 
-        stm.id = exp[0].trim();
+        stm.id = exp[0].trim();//production head
         stm.gives = new Array();
         stm.first = new Array();
         stm.follow = new Array();
 
-        var spli = exp[1].split('|');
-        stm.gives.push(spli[0].trim());
+        var spli = exp[1].split('|');//Production body
+        stm.gives.push(spli[0].trim());//First production body element
 
-        for (i = 1; i < spli.length; i++) 
+        for (i = 1; i < spli.length; i++) //remaining elements
         {
                 stm.gives.push(spli[i].trim());    
         }
 
-        for(i=0; i<stm.gives.length;i++)
+        for(i=0; i<stm.gives.length;i++)//printing productions
             temp = temp + stm.id+"->"+ stm.gives[i]+"<br>";
     
         
@@ -220,13 +220,14 @@ function calculateFollow()
             }
         }  
     }
-
+	
     // rule 1 
 //    grammar[0].follow.push('$');
   
 
 }
 
+<<<<<<< HEAD
 
 
 function check()
@@ -237,8 +238,66 @@ function check()
         alert(grammer[i].id);
         alert(grammer[i].gives);
     }
+=======
+function getFirst(x){
+	for(var i=0;i<grammar.length;i++){
+		if(grammar[i].id==x){
+			console.log('yes');
+			for(var j=0;j<grammar[i].first.length;i++)
+				console.log(grammar[i].first[j]);
+		}
+	}
 }
-
-function removeleftrecursion()
-{
+function getFollow(x){
+	for(var i=0;i<grammar.length;i++){
+		if(grammar[i].id==x){
+			console.log('yes');
+			for(var j=0;j<grammar[i].follow.length;i++)
+				console.log(grammar[i].follow[j]);
+		}
+	}
+>>>>>>> origin/master
+}
+var ret;
+function exists(x,y){
+	for(var i=0;i<x.length;i++){
+		if(x[i]==y)
+			return true;
+	}
+	return false;
+}
+function getAllTerminals(){
+	var x=new Array;
+	for(var i=0;i<grammar.length;i++)
+		x=x.concat(getTerminals(i));
+	return x;
+}
+function getTerminals(n){
+	var count=1;
+	ret=grammar[n].gives[0].split(" ");
+	for(var j=1;j<grammar[n].gives.length;j++){
+			ret=ret.concat(grammar[n].gives[j].split(" "));
+			count++;
+	}
+	var tmp=new Array();
+	tmp[0]=ret[0];
+	count=0;
+	for(var i=0;i<ret.length;i++){
+		if(exists(tmp,ret[i])==false)
+			tmp.push(ret[i]);
+	}
+	var tmp2=new Array;
+	for(var i=0;i<tmp.length;i++){
+		if(!(isNaN(parseInt(tmp[i])))){
+			tmp2.push(tmp[i]);
+			continue;
+		}
+		var ch=tmp[i].toLowerCase();
+		if(tmp[i]==ch){
+			console.log("yes");
+			tmp2.push(tmp[i]);
+		}
+	}
+	//console.log(tmp2);
+	return tmp2;
 }
