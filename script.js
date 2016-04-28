@@ -45,9 +45,82 @@ function validate()
         
         grammar.push(stm);
     }
-    
+    left_recursion();
+    temp="";
+    for(j=0;j<grammar.length;j++)
+    for(i=0; i<grammar[j].gives.length;i++)//printing productions
+            temp = temp + grammar[j].id+"->"+ grammar[j].gives[i]+"<br>";
     document.getElementById("inputarea").innerHTML = temp;
     document.getElementById("firstbutton").style.visibility="visible";
+    
+}
+
+function left_recursion()
+{
+    var i,j;
+    console.log("recursion called\n");
+    for(i=0;i<grammar.length;i++)
+    {
+        for(j=0;j<grammar[i].gives.length;j++)
+        {
+            if(grammar[i].id == grammar[i].gives[j][0])
+            {
+                remove_left_recursion(i);
+                break;
+            }
+        }
+    }
+}
+
+function remove_left_recursion(i)
+{
+    console.log(i+" position has recursion");
+    var j,k;
+    var alpha=new Array();
+    var beta=new Array();
+    for(j=0;j<grammar[i].gives.length;j++)
+    {
+        if(grammar[i].id == grammar[i].gives[j][0])
+        {
+            var temp = grammar[i].gives[j].substring(1);
+            alpha.push(temp);
+            console.log("alpha = "+temp);
+        }
+        else
+        {
+            beta.push(grammar[i].gives[j]);
+            console.log("beta = "+grammar[i].gives[j]);
+        }
+    }
+    var all = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('');
+    for(j=0;j<all.length;j++)
+    {
+        var count=0;
+        for(k=0;k<grammar.length;k++)
+            if(all[j]!=grammar[k].id)
+                count=count+1;
+        if(count==grammar.length)
+            break;
+    }
+    grammar[i].gives = new Array();
+    for(k=0;k<beta.length;k++)
+    {
+        var temp=beta[k]+all[j];
+        grammar[i].gives[k]=temp;
+    }
+    var stm = new Object();
+    stm.id = all[j];
+    stm.gives = new Array();
+    stm.first = new Array();
+    stm.follow = new Array();
+    for(k=0;k<alpha.length;k++)
+    {
+        var temp = alpha+all[j];
+        stm.gives.push(temp)
+    }
+    stm.gives.push("ε");
+    grammar.push(stm);
+    
 }
 
 function calculateFirst()
