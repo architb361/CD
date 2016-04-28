@@ -56,31 +56,68 @@ function calculateFirst()
     temp = " "
     find = []
     for( i = 0 ; i < grammar.length ; ++i)
-    {
         find.push(grammar[i].id)
+    for( i = 0 ; i < grammar.length ; ++i)
+    {
         var first = new Array();
         for(j=0; j<grammar[i].gives.length;j++)
         {   var t = String(grammar[i].gives[j]);
-            first.push(t.charAt(0))
+            //first.push(t.charAt(0))
+            for(k = 0; k <grammar[i].gives[j].length;k++)
+            {
+                ch = grammar[i].gives[j][k]         
+                if((ch == ch.toUpperCase()) && isNaN(ch))
+                {   
+                    indx = find.indexOf(ch);
+                    if( grammar[indx].gives.indexOf('ε')>=0)
+                    {
+                        first.push(ch);
+                    }
+                    else
+                    {
+                        first.push(ch);
+                        break;
+                    }
+                }
+                else
+                {
+                    first.push(ch);
+                    break;
+                }
+            }
         }
         grammar[i].first = first;
     }
     
-
-        
+     for( i = 0 ; i < grammar.length ; ++i)
+                 console.log(grammar[i].id+" "+grammar[i].first)
+      
+          
+    // A - > B   then first(A) = first(B)  
     done = 1
     while(done)
-    {
+     {
         for( i = 0 ; i < grammar.length ; ++i)
         {   
-            l = []
+            l = new Array();
             for( j =0 ;j< grammar[i].first.length;++j)
             {
-                if(grammar[i].first[j] == grammar[i].first[j].toUpperCase() && isNaN(grammar[i].first[j]))
+                console.log("runing"+grammar[i].id+" "+grammar[i].first);
+                if((grammar[i].first[j] == grammar[i].first[j].toUpperCase()) && isNaN(grammar[i].first[j]) && grammar[i].first[j]!='ε' )
                     {   x  = grammar[i].first[j];
                         indx = grammar[i].first.indexOf(x);
-                        grammar[i].first.splice(indx,1);
-                        l = l.concat(grammar[find.indexOf(x)].first);
+                       
+                        z = grammar[find.indexOf(x)].first.slice();
+                        y = z.indexOf('ε');
+                        if(y!=-1)
+                            z.splice(y,1);
+                        l = l.concat(z);
+                        
+                       // l = l.concat(grammar[find.indexOf(x)].first);
+                    }
+                else{
+                        l.push(grammar[i].first[j]);
+                        console.log(" pushing to "+l + " val "+grammar[i].first[j]);
                     }
             }
             grammar[i].first = l;
@@ -89,17 +126,30 @@ function calculateFirst()
         done = 0;
         for( i = 0 ; i < grammar.length ; ++i)
             for( j =0 ;j< grammar[i].first.length;++j)
-                if(grammar[i].first[j] == grammar[i].first[j].toUpperCase() && isNaN(grammar[i].first[j]))
-                {
-                    console.log(grammar[i].id+" "+grammar[i].first[j])
-                    done = 1;
-                    break;
-                }
-
+            {
+                    console.log(grammar[i].id+" "+grammar[i].first)
+                    if(grammar[i].first[j] == grammar[i].first[j].toUpperCase() && isNaN(grammar[i].first[j]))
+                    {
+                        done = 1;
+                        break;
+                    }
+            }
 
 
     }
 
+    for(j = 0 ; j < grammar.length ; ++j)
+    {   
+        a = [];
+        for ( i = 0; i < grammar[j].first.length ; i++ ) {
+            var current = grammar[j].first[i];
+            if (a.indexOf(current) < 0) 
+                a.push(current);
+        }
+
+        grammar[j].first = a;
+
+    }    
 
     for(i = 0 ; i < grammar.length ; ++i)
     {   
@@ -108,7 +158,7 @@ function calculateFirst()
             temp = temp + grammar[i].first[j]+ " "; 
         temp = temp +"<br>";        
     }
-<<<<<<< HEAD
+
     document.getElementById("firstarea").innerHTML = temp;
     document.getElementById("followbutton").style.visibility="visible";
 
@@ -177,8 +227,8 @@ function calculateFollow()
 
 }
 
-=======
-}
+
+
 function check()
 {
     var i,j;
@@ -192,4 +242,3 @@ function check()
 function removeleftrecursion()
 {
 }
->>>>>>> origin/master
