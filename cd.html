@@ -75,7 +75,19 @@
     <div align="center">
         <textarea rows="4" cols="50" id="inp" ></textarea>
         <br />
+
         <button type="button" class="btn btn-primary" onclick="validate()">Validate</button>
+        <button type="button" class="btn btn-primary" onclick="calculateFirst()" style="visibility: hidden;" id="firstbutton">Calculate First</button>
+        <button type="button" class="btn btn-primary" onclick="calculateFollow()" style="visibility: hidden;" id="followbutton">Calculate Follow</button>
+       	
+       	<br/><h4>Input</h4>
+        <h5 id = "inputarea"></h5>
+        
+        <br/><h4>First</h4>
+        <h5 id ="firstarea"></h5>
+
+        <br/><h4>Follow</h4>
+        <h5 id ="followarea"></h5>
     </div>
     
 </body>
