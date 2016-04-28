@@ -28,6 +28,8 @@ function validate()
 
         stm.id = exp[0].trim();
         stm.gives = new Array();
+        stm.first = new Array();
+        stm.follow = new Array();
 
         var spli = exp[1].split('|');
         stm.gives.push(spli[0].trim());
@@ -106,6 +108,7 @@ function calculateFirst()
             temp = temp + grammar[i].first[j]+ " "; 
         temp = temp +"<br>";        
     }
+<<<<<<< HEAD
     document.getElementById("firstarea").innerHTML = temp;
     document.getElementById("followbutton").style.visibility="visible";
 
@@ -174,3 +177,19 @@ function calculateFollow()
 
 }
 
+=======
+}
+function check()
+{
+    var i,j;
+    for(i=0;i<grammer.length;i++)
+    {
+        alert(grammer[i].id);
+        alert(grammer[i].gives);
+    }
+}
+
+function removeleftrecursion()
+{
+}
+>>>>>>> origin/master
