@@ -242,18 +242,19 @@ function calculateFollow()
 function check()
 {
     var i,j;
-    for(i=0;i<grammer.length;i++)
+    for(i=0;i<grammar.length;i++)
     {
-        alert(grammer[i].id);
-        alert(grammer[i].gives);
+        alert(grammar[i].id);
+        alert(grammar[i].gives);
     }
 }
 function getFirst(x){
 	for(var i=0;i<grammar.length;i++){
 		if(grammar[i].id==x){
-			console.log('yes');
-			for(var j=0;j<grammar[i].first.length;i++)
-				console.log(grammar[i].first[j]);
+			//console.log('yes');
+			//for(var j=0;j<grammar[i].first.length;i++)
+				//console.log(grammar[i].first[j]);
+			console.log("In getFirst: "+grammar[i].first);
 			return grammar[i].first;
 		}
 	}
@@ -263,14 +264,14 @@ function getFollow(x){
 	for(var i=0;i<grammar.length;i++){
 		if(grammar[i].id==x){
 			console.log('yes');
-			for(var j=0;j<grammar[i].follow.length;i++)
-				console.log(grammar[i].follow[j]);
+			//for(var j=0;j<grammar[i].follow.length;i++)
+				//console.log(grammar[i].follow[j]);
 			return grammar[i].follow;
 		}
 	}
 
 }
-var ret;
+
 function exists(x,y){
 	for(var i=0;i<x.length;i++){
 		if(x[i]==y)
@@ -288,7 +289,7 @@ function getAllTerminals(){
 function getTerminals(n){
 	var count=1;
 	var ret;
-	ret=grammar[n].gives[0].split(" ");
+	ret=grammar[n].gives[0];
 	for(var j=1;j<grammar[n].gives.length;j++){
 			ret=ret.concat(grammar[n].gives[j].split(" "));
 			count++;
@@ -342,10 +343,13 @@ function parsingTable(){
 	console.log(productions);
 	for(var i=0;i<rows;i++){
 		var first=getFirst(table.heads[i]);
+		console.log("First:\n"+first);
 		for(var j=0;j<first.length;j++){
-			for(var k=0;k<cols,k++){
+			for(var k=0;k<cols;k++){
 				if(first[j]==table.terms[k]){
-					table.values[i][k]=table.heads[i]+"->"+productions[k];
+					console.log(first[j]+"=="+table.terms[k]);
+					table.values[i][k]=table.heads[i]+"->"+productions[i];
+					console.log(table.values[i][k]);
 				}
 			}
 			if(first[j]=="ε"){
@@ -353,13 +357,21 @@ function parsingTable(){
 				for(var x=0;x<follow.length;x++){
 					for(var y=0;y<cols;y++){
 						if(follow[x]==table.terms[y]){
-							table.values[i][y]=table.heads[i]+"->"+productions[y];
+							table.values[i][y]=table.heads[i]+"->"+productions[i];
 						}
 					}
 				}
 			}
 		}
 	}
+	/*var p=document.getElementById("para");
+	for(var i=0;i<cols;i++)
+		p.innerHTML=table.terms;
+	for(var i=0;i<rows;i++){
+		for(var j=0;j<cols;j++){
+			
+		}
+	}*/
 }
 
 	
