@@ -222,12 +222,22 @@ function calculateFollow()
     }
 	
     // rule 1 
-//    grammar[0].follow.push('$');
+   grammar[0].follow.push('$');
+
+
+   temp="";
+   for(i = 0 ; i < grammar.length ; ++i)
+    {   
+        temp = temp + grammar[i].id + " - ";
+        for(j=0; j<grammar[i].follow.length;j++)
+            temp = temp + grammar[i].follow[j]+ " "; 
+        temp = temp +"<br>";        
+    }
   
 
+    document.getElementById("followarea").innerHTML = temp;
 }
 
-<<<<<<< HEAD
 
 
 function check()
@@ -238,7 +248,8 @@ function check()
         alert(grammer[i].id);
         alert(grammer[i].gives);
     }
-=======
+}
+
 function getFirst(x){
 	for(var i=0;i<grammar.length;i++){
 		if(grammar[i].id==x){
@@ -248,6 +259,7 @@ function getFirst(x){
 		}
 	}
 }
+
 function getFollow(x){
 	for(var i=0;i<grammar.length;i++){
 		if(grammar[i].id==x){
@@ -256,7 +268,6 @@ function getFollow(x){
 				console.log(grammar[i].follow[j]);
 		}
 	}
->>>>>>> origin/master
 }
 var ret;
 function exists(x,y){
