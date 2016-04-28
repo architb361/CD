@@ -309,6 +309,7 @@ function calculateFollow()
   
 
     document.getElementById("followarea").innerHTML = temp;
+	parsingTable();
 }
 
 
@@ -392,6 +393,31 @@ function getTerminals(n){
 }
 var productions;
 var table;
+function displayTable(){
+	console.log(table);
+	var t=document.getElementById("table");
+	var r=t.insertRow(0);
+	for(var i=0;i<table.terms.length+1;i++){
+		var c1=r.insertCell(i);
+		if(i==0){
+			c1.innerHTML="Table";
+			continue;
+		}
+		c1.innerHTML=table.terms[i-1];
+	}
+	for(var i=1;i<table.heads.length+1;i++){
+		var r=t.insertRow(i);
+		for(var j=0;j<table.terms.length+1;j++){
+			var c1=r.insertCell(j);
+			if(j==0)
+				c1.innerHTML=table.heads[i-1];
+			else if(table.values[i-1][j-1]==undefined)
+				continue;
+			else
+				c1.innerHTML=table.values[i-1][j-1];
+		}
+	}
+}
 function parsingTable(){
 	var rows=grammar.length;
 	table=new Object();
@@ -437,14 +463,7 @@ function parsingTable(){
 			}
 		}
 	}
-	/*var p=document.getElementById("para");
-	for(var i=0;i<cols;i++)
-		p.innerHTML=table.terms;
-	for(var i=0;i<rows;i++){
-		for(var j=0;j<cols;j++){
-			
-		}
-	}*/
+	displayTable();
 }
 
 	
