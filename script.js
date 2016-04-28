@@ -79,7 +79,7 @@ function calculateFirst()
                         break;
                     }
                 }
-                else
+                else 
                 {
                     first.push(ch);
                     break;
