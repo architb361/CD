@@ -58,7 +58,11 @@ function validate()
 function left_recursion()
 {
     var i,j;
+<<<<<<< HEAD
     //console.log("recursion called\n");
+=======
+    console.log("recursion called\n");
+>>>>>>> origin/master
     for(i=0;i<grammar.length;i++)
     {
         for(j=0;j<grammar[i].gives.length;j++)
@@ -74,7 +78,11 @@ function left_recursion()
 
 function remove_left_recursion(i)
 {
+<<<<<<< HEAD
     //console.log(i+" position has recursion");
+=======
+    console.log(i+" position has recursion");
+>>>>>>> origin/master
     var j,k;
     var alpha=new Array();
     var beta=new Array();
@@ -84,12 +92,20 @@ function remove_left_recursion(i)
         {
             var temp = grammar[i].gives[j].substring(1);
             alpha.push(temp);
+<<<<<<< HEAD
             //console.log("alpha = "+temp);
+=======
+            console.log("alpha = "+temp);
+>>>>>>> origin/master
         }
         else
         {
             beta.push(grammar[i].gives[j]);
+<<<<<<< HEAD
             //console.log("beta = "+grammar[i].gives[j]);
+=======
+            console.log("beta = "+grammar[i].gives[j]);
+>>>>>>> origin/master
         }
     }
     var all = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split('');
@@ -316,7 +332,11 @@ function calculateFollow()
   
 
     document.getElementById("followarea").innerHTML = temp;
+<<<<<<< HEAD
     parsingTable();
+=======
+	parsingTable();
+>>>>>>> origin/master
 }
 
 
@@ -330,6 +350,7 @@ function check()
     }
 }
 function getFirst(x){
+<<<<<<< HEAD
     for(var i=0;i<grammar.length;i++){
         if(grammar[i].id==x){
             ////console.log('yes');
@@ -350,6 +371,28 @@ function getFollow(x){
             return grammar[i].follow;
         }
     }
+=======
+	for(var i=0;i<grammar.length;i++){
+		if(grammar[i].id==x){
+			//console.log('yes');
+			//for(var j=0;j<grammar[i].first.length;i++)
+				//console.log(grammar[i].first[j]);
+			console.log("In getFirst: "+grammar[i].first);
+			return grammar[i].first;
+		}
+	}
+}
+
+function getFollow(x){
+	for(var i=0;i<grammar.length;i++){
+		if(grammar[i].id==x){
+			console.log('yes');
+			//for(var j=0;j<grammar[i].follow.length;i++)
+				//console.log(grammar[i].follow[j]);
+			return grammar[i].follow;
+		}
+	}
+>>>>>>> origin/master
 
 }
 
@@ -362,6 +405,7 @@ function exists(x,y){
 }
 
 function getAllTerminals(){
+<<<<<<< HEAD
     var terminals=new Array;
     for(var i=0;i<grammar.length;i++)
         terminals=terminals.concat(getTerminals(i));
@@ -397,10 +441,48 @@ function getTerminals(n){
     }
     //console.log(tmp2);
     return tmp2;
+=======
+ 	var terminals=new Array;
+	for(var i=0;i<grammar.length;i++)
+		terminals=terminals.concat(getTerminals(i));
+	return terminals;
+}
+function getTerminals(n){
+	var count=1;
+	var ret;
+	ret=grammar[n].gives[0];
+	for(var j=1;j<grammar[n].gives.length;j++){
+			ret=ret.concat(grammar[n].gives[j].split(" "));
+			count++;
+	}
+	var tmp=new Array();
+	tmp[0]=ret[0];
+	count=0;
+	for(var i=0;i<ret.length;i++){
+		if(exists(tmp,ret[i])==false)
+			tmp.push(ret[i]);
+	}
+	count=0;
+	var tmp2=new Array;
+	for(var i=0;i<tmp.length;i++){
+		if(!(isNaN(parseInt(tmp[i])))){
+			tmp2.push(tmp[i]);
+			continue;
+		}
+		var ch=tmp[i].toLowerCase();
+		if(tmp[i]==ch && ch!="ε"){
+				//console.log("yes");
+				tmp2.push(tmp[i]);
+		}
+	}
+	console.log(tmp2);
+	return tmp2;
+>>>>>>> origin/master
 }
 var productions;
 var table;
 function displayTable(){
+<<<<<<< HEAD
     //console.log(table);
     var t=document.getElementById("table");
     var r=t.insertRow(0);
@@ -475,3 +557,79 @@ function parsingTable(){
 
     
     
+=======
+	console.log(table);
+	var t=document.getElementById("table");
+	var r=t.insertRow(0);
+	for(var i=0;i<table.terms.length+1;i++){
+		var c1=r.insertCell(i);
+		if(i==0){
+			c1.innerHTML="Table";
+			continue;
+		}
+		c1.innerHTML=table.terms[i-1];
+	}
+	for(var i=1;i<table.heads.length+1;i++){
+		var r=t.insertRow(i);
+		for(var j=0;j<table.terms.length+1;j++){
+			var c1=r.insertCell(j);
+			if(j==0)
+				c1.innerHTML=table.heads[i-1];
+			else if(table.values[i-1][j-1]==undefined)
+				continue;
+			else
+				c1.innerHTML=table.values[i-1][j-1];
+		}
+	}
+}
+function parsingTable(){
+	var rows=grammar.length;
+	table=new Object();
+	table.values=new Array(rows);
+	var terminals =new Array;
+	terminals=getAllTerminals();
+	terminals.push("$");
+	var cols=terminals.length;
+	table.heads=new Array(rows);
+	table.terms=new Array(cols);
+	productions=new Array(rows);
+	for(var i=0;i<rows;i++){
+		table.values[i]=new Array(cols);
+		table.heads[i]=grammar[i].id;
+		productions[i]=grammar[i].gives;
+	}
+	
+	for(var i=0;i<cols;i++)
+		table.terms[i]=terminals[i];
+	console.log(table.heads);
+	console.log(table.terms);
+	console.log(productions);
+	for(var i=0;i<rows;i++){
+		var first=getFirst(table.heads[i]);
+		console.log("First:\n"+first);
+		for(var j=0;j<first.length;j++){
+			for(var k=0;k<cols;k++){
+				if(first[j]==table.terms[k]){
+					console.log(first[j]+"=="+table.terms[k]);
+					table.values[i][k]=table.heads[i]+"->"+productions[i];
+					console.log(table.values[i][k]);
+				}
+			}
+			if(first[j]=="ε"){
+				var follow=getFollow(table.heads[i]);
+				for(var x=0;x<follow.length;x++){
+					for(var y=0;y<cols;y++){
+						if(follow[x]==table.terms[y]){
+							table.values[i][y]=table.heads[i]+"->"+productions[i];
+						}
+					}
+				}
+			}
+		}
+	}
+	displayTable();
+}
+
+	
+	
+>>>>>>> origin/master
